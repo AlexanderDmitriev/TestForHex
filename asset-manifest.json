@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/TestForHex/static/css/main.7acaea2f.css",
+    "main.js": "/TestForHex/static/js/main.49b9c89b.js",
+    "index.html": "/TestForHex/index.html",
+    "main.7acaea2f.css.map": "/TestForHex/static/css/main.7acaea2f.css.map",
+    "main.49b9c89b.js.map": "/TestForHex/static/js/main.49b9c89b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.49b9c89b.js"
+  ]
+}
