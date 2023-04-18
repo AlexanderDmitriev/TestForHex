@@ -1,8 +1,12 @@
-import { createStore, combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
+import { configureStore } from '@reduxjs/toolkit';
+import { dishesApi } from './dishes';
 
-const rootReducer = combineReducers({
-  form: formReducer
-})
-
-export const store = createStore(rootReducer)
+export const store = configureStore({
+  reducer: {
+    [dishesApi.reducerPath]: dishesApi.reducer,
+  },
+  middleware: getDefaultMiddleware => [
+    ...getDefaultMiddleware(),
+    dishesApi.middleware,
+  ],
+});

@@ -1,14 +1,31 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-let KitchenForm = ({ handleSubmit }) => {
-  return <form onSubmit={handleSubmit}>{/* form body*/}</form>;
+let KitchenForm = () => {
+  const handleSubmit = event => {
+    event.preventDefault();
+    console.log(event.currentTarget);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="firstName">First Name</label>
+        <Field name="firstName" component="input" type="text" />
+      </div>
+      <div>
+        <label htmlFor="lastName">Last Name</label>
+        <Field name="lastName" component="input" type="text" />
+      </div>
+      <div>
+        <label htmlFor="email">Email</label>
+        <Field name="email" component="input" type="email" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  );
 };
 
-KitchenForm = reduxForm({
-  // a unique name for the form
+export default reduxForm({
   form: 'contact',
 })(KitchenForm);
-
-
-export default KitchenForm;

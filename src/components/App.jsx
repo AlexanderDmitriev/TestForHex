@@ -1,21 +1,17 @@
-import KitchenForm from './KitchenForm';
+/* import KitchenForm from './KitchenForm'; */
+import { MyKitchenForm } from './MyKitchenForm';
+import { usePostDishesMutation } from '../redux/dishes';
 
 export const App = () => {
+  const [postDish] = usePostDishesMutation();
+
+  const postMyDish = ({ name, preparation_time }) => {
+    postDish({ name, preparation_time });
+  };
   return (
     <>
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
-      >
-        React template
-      </div>
-      <KitchenForm />
+      {/*  <KitchenForm /> */}
+      <MyKitchenForm onSubmit={postMyDish} />
     </>
   );
 };
