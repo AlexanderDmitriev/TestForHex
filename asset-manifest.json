@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/TestForHex/static/css/main.7acaea2f.css",
-    "main.js": "/TestForHex/static/js/main.155298fb.js",
+    "main.js": "/TestForHex/static/js/main.db9c704c.js",
     "index.html": "/TestForHex/index.html",
     "main.7acaea2f.css.map": "/TestForHex/static/css/main.7acaea2f.css.map",
-    "main.155298fb.js.map": "/TestForHex/static/js/main.155298fb.js.map"
+    "main.db9c704c.js.map": "/TestForHex/static/js/main.db9c704c.js.map"
   },
   "entrypoints": [
     "static/css/main.7acaea2f.css",
-    "static/js/main.155298fb.js"
+    "static/js/main.db9c704c.js"
   ]
 }
