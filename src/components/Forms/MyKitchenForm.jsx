@@ -1,60 +1,34 @@
-import { Formik, Form, ErrorMessage, Field } from 'formik';
+import { Formik, Form, ErrorMessage } from 'formik';
 import { PizzaForm } from './PizzaForm';
 import { SoapForm } from './SoapForm';
 import { SandwichForm } from './SandwichForm';
-import { useState } from 'react';
 import { schema } from '../validationSchema';
+import { timeFormatter } from '../timeFormatter';
+import { dataFormatting } from '../dataFormatting';
+import {
+  InputField,
+  TitleLabel,
+  Container,
+  InputFieldsSection, LetsGoButton,
+} from './MyKitchenForm.styled';
+import { useState } from 'react';
 
-export const MyKitchenForm = ({ onSubmit }) => {
-  const [dishesType, setDishesType] = useState('');
-
-  const handleSelect = event => {
-    const { value } = event.target;
-    setDishesType(value);
-    console.log(value);
-  };
-
+export const MyKitchenForm = ({ dishesType, handleSelect, onSubmit }) => {
+  const [spiceLevel, setSpiceLevel] = useState(1);
   const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
-
-    const date = new Date(0);
-    date.setMinutes(values.preparation_time);
-    const timeString = date.toISOString().substr(11, 8);
-    const formattedTime = timeString;
-
-    let additionalData;
-    switch (dishesType) {
-      case 'pizza':
-        additionalData = {
-          no_of_slices: values.no_of_slices,
-          diameter: values.diameter,
-        };
-        break;
-
-      case 'soup':
-        additionalData = { spiciness_scale: values.spiciness_scale };
-        break;
-      case 'sandwich':
-        additionalData = { slices_of_bread: values.slices_of_bread };
-        break;
-
-      default:
-        additionalData = null;
-    }
-    const dataToSending = {
-      name: values.name,
-      preparation_time: formattedTime,
-      type: dishesType,
-      ...additionalData,
-    };
-    console.log(dataToSending);
-    console.log(dishesType);
+    const formattedTime = timeFormatter(values);
+    const dataToSending = dataFormatting(
+      values,
+      dishesType,
+      formattedTime,
+      spiceLevel
+    );
     onSubmit(dataToSending);
     resetForm();
   };
 
   return (
-    <>
+    <Container>
       <Formik
         initialValues={{
           name: '',
@@ -71,50 +45,62 @@ export const MyKitchenForm = ({ onSubmit }) => {
         {({ handleSubmit, isSubmitting }) => (
           <div>
             <Form onSubmit={handleSubmit}>
-              <label htmlFor="name">
-                Name
-                <Field type="text" name="name" title="name" required />
-                <ErrorMessage name="name" render={<p>{'Incorrect name'}</p>} />
-              </label>
-              <label htmlFor="preparation_time">
-                preparation_time
-                <Field
-                  type="string"
-                  name="preparation_time"
-                  title="preparation_time"
-                  required
-                />
-                <ErrorMessage
-                  name="preparation_time"
-                  render={msg => <p>{'Incorrect preparation_time'}</p>}
-                />
-              </label>
-              <label htmlFor="type">
-                type
-                <Field
-                  name="type"
-                  as="select"
-                  value={dishesType}
-                  required
-                  onChange={handleSelect}
-                >
-                  <option value="empty">Select your favorite dish</option>
-                  <option value="pizza">pizza</option>
-                  <option value="soup">soup</option>
-                  <option value="sandwich">sandwich</option>
-                </Field>
-              </label>
-              {dishesType==="pizza" && <PizzaForm />}
-              {dishesType==="soup" && <SoapForm />}
-              {dishesType==="sandwich" && <SandwichForm />}
+              <InputFieldsSection>
+                <div>
+                  <TitleLabel htmlFor="name">
+                    Your dish
+                    <InputField type="text" name="name" title="name" required />
+                    <ErrorMessage
+                      name="name"
+                      render={<p>{'Incorrect name'}</p>}
+                    />
+                  </TitleLabel>
+                  <TitleLabel htmlFor="preparation_time">
+                    Preparation time in minutes
+                    <InputField
+                      type="string"
+                      name="preparation_time"
+                      title="preparation_time"
+                      required
+                    />
+                    <ErrorMessage
+                      name="preparation_time"
+                      render={msg => <p>{'Incorrect preparation_time'}</p>}
+                    />
+                  </TitleLabel>
+                  <TitleLabel htmlFor="type">
+                    Type of your dish
+                    <InputField
+                      name="type"
+                      as="select"
+                      value={dishesType}
+                      required
+                      onChange={handleSelect}
+                    >
+                      <option value="empty">Select your favorite dish</option>
+                      <option value="pizza">pizza</option>
+                      <option value="soup">soup</option>
+                      <option value="sandwich">sandwich</option>
+                    </InputField>
+                  </TitleLabel>
+                </div>
+                {dishesType === 'pizza' && <PizzaForm />}
+                {dishesType === 'soup' && (
+                  <SoapForm
+                    spiceLevel={spiceLevel}
+                    setSpiceLevel={setSpiceLevel}
+                  />
+                )}
+                {dishesType === 'sandwich' && <SandwichForm />}
+              </InputFieldsSection>
 
-              <button type="submit" disabled={isSubmitting}>
+              <LetsGoButton type="submit" disabled={isSubmitting}>
                 Let`s GO!`
-              </button>
+              </LetsGoButton>
             </Form>
           </div>
         )}
       </Formik>
-    </>
+    </Container>
   );
 };

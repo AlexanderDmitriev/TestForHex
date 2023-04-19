@@ -1,12 +1,13 @@
-import {  ErrorMessage, Field } from 'formik';
+import {  ErrorMessage } from 'formik';
+import {TitleLabel,InputField} from './MyKitchenForm.styled';
 
 export const SandwichForm = () => {
 
   return (
     <>
-        <label htmlFor="slices_of_bread">
-        slices_of_bread
-          <Field
+        <TitleLabel htmlFor="slices_of_bread">
+        How many slices of bread?
+          <InputField
             type="number"
             name="slices_of_bread"
             title="slices_of_bread"
@@ -16,7 +17,7 @@ export const SandwichForm = () => {
             name="slices_of_bread"
             render={<p>{'Incorrect slices_of_bread'}</p>}
           />
-        </label>
+        </TitleLabel>
     </>
   );
 };

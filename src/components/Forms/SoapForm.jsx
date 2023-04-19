@@ -1,24 +1,33 @@
-import { ErrorMessage, Field } from 'formik';
+import { ErrorMessage } from 'formik';
+import {TitleLabel,RangeSelect} from './MyKitchenForm.styled';
 
-export const SoapForm = () => {
+export const SoapForm = ({spiceLevel, setSpiceLevel}) => {
+
+  const handleChange = event => {
+    const { value } = event.target;
+    setSpiceLevel(value);
+  };
+
   return (
     <>
-      <label htmlFor="spiciness_scale">
-        spiciness_scale
-        <Field
+      <TitleLabel htmlFor="spiciness_scale">
+        Your spiciness scale is {spiceLevel}
+        <RangeSelect
           type="range"
           min="1"
           max="10"
           step="1"
           name="spiciness_scale"
           title="spiciness_scale"
+          value={spiceLevel}
+          onChange={handleChange}
           required
         />
         <ErrorMessage
           name="spiciness_scale"
           render={<p>{'Incorrect spiciness_scale'}</p>}
         />
-      </label>
+      </TitleLabel>
     </>
   );
 };
