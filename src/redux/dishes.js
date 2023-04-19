@@ -8,12 +8,14 @@ export const dishesApi = createApi({
   tagTypes: ['Dish'],
   endpoints: builder => ({
     postDishes: builder.mutation({
-      query: ({ name, preparation_time }) => ({
+      query: ({ name, preparation_time, type, ...additionalData }) => ({
         url: `/dishes`,
         method: 'POST',
         body: {
           name,
           preparation_time,
+          type,
+          ...additionalData,
         },
       }),
       invalidatesTags: ['Dish'],
