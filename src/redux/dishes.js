@@ -9,7 +9,7 @@ export const dishesApi = createApi({
   endpoints: builder => ({
     postDishes: builder.mutation({
       query: ({ name, preparation_time, type, ...additionalData }) => ({
-        url: `/dishes`,
+        url: `/`,
         method: 'POST',
         body: {
           name,

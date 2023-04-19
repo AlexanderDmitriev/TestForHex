@@ -14,6 +14,7 @@ const schema = yup.object().shape({
 
 export const MyKitchenForm = ({ onSubmit }) => {
   const [dishesType, setDishesType] = useState('');
+
   const handleSubmit = (values, { resetForm }) => {
     console.log(values);
 
@@ -33,13 +34,16 @@ export const MyKitchenForm = ({ onSubmit }) => {
         break;
 
       case 'soup':
+        setDishesType('soup');
         additionalData = null;
         break;
       case 'sandwich':
+        setDishesType('sandwich');
         additionalData = null;
         break;
 
       default:
+        setDishesType('');
         additionalData = null;
     }
     const dataToSending = {
@@ -89,13 +93,14 @@ export const MyKitchenForm = ({ onSubmit }) => {
               </label>
               <label htmlFor="type">
                 type
-                <Field name="type" as="select" onChange={()=>null} required>
+                <Field name="type" as="select"   required>
                   <option value="pizza">pizza</option>
                   <option value="soup">soup</option>
                   <option value="sandwich">sandwich</option>
                 </Field>
               </label>
-              {dishesType==="pizza" && <PizzaForm />}
+              {/* {dishesType==="pizza" && <PizzaForm />} */}
+              <PizzaForm />
 
               <button type="submit" disabled={isSubmitting}>
                 Let`s GO!`
