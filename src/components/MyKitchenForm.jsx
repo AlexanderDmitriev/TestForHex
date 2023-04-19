@@ -39,7 +39,7 @@ export const MyKitchenForm = ({ onSubmit }) => {
     const formattedTime = timeString;
 
     let additionalData;
-    switch (values.type) {
+    switch (dishesType) {
       case 'pizza':
         additionalData = {
           no_of_slices: values.no_of_slices,
@@ -60,7 +60,7 @@ export const MyKitchenForm = ({ onSubmit }) => {
     const dataToSending = {
       name: values.name,
       preparation_time: formattedTime,
-      type: values.type,
+      type: dishesType,
       ...additionalData,
     };
     console.log(dataToSending);
