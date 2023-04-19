@@ -86,6 +86,7 @@ export const MyKitchenForm = ({ onSubmit }) => {
               <label htmlFor="type">
                 type
                 <Field name="type" as="select"   required>
+                <option value="empty" >Select your favorite dish</option>
                   <option value="pizza">pizza</option>
                   <option value="soup">soup</option>
                   <option value="sandwich">sandwich</option>
