@@ -1,10 +1,34 @@
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import { PizzaForm } from './PizzaForm';
-import { useState } from 'react';
-import {schema} from './validationSchema';
+import { SoapForm } from './SoapForm';
+import { SandwichForm } from './SandwichForm';
+import { useState, useEffect } from 'react';
+import { schema } from './validationSchema';
 
 export const MyKitchenForm = ({ onSubmit }) => {
   const [dishesType, setDishesType] = useState('');
+
+  useEffect(() => {
+    switch (dishesType) {
+      case 'pizza':
+        setDishesType('pizza');
+        break;
+      case 'soup':
+        setDishesType('soup');
+        break;
+      case 'sandwich':
+        setDishesType('sandwich');
+        break;
+      default:
+        setDishesType('');
+    }
+  }, [dishesType]);
+
+  const handleSelect = event => {
+    const { value } = event.target;
+    setDishesType(value);
+    console.log(value);
+  };
 
   const handleSubmit = (values, { resetForm }) => {
     console.log(values);
@@ -17,7 +41,6 @@ export const MyKitchenForm = ({ onSubmit }) => {
     let additionalData;
     switch (values.type) {
       case 'pizza':
-        setDishesType('pizza');
         additionalData = {
           no_of_slices: values.no_of_slices,
           diameter: values.diameter,
@@ -25,16 +48,13 @@ export const MyKitchenForm = ({ onSubmit }) => {
         break;
 
       case 'soup':
-        setDishesType('soup');
-        additionalData = null;
+        additionalData = { spiciness_scale: values.spiciness_scale };
         break;
       case 'sandwich':
-        setDishesType('sandwich');
-        additionalData = null;
+        additionalData = { slices_of_bread: values.slices_of_bread };
         break;
 
       default:
-        setDishesType('');
         additionalData = null;
     }
     const dataToSending = {
@@ -58,6 +78,8 @@ export const MyKitchenForm = ({ onSubmit }) => {
           type: '',
           no_of_slices: '',
           diameter: '',
+          spiciness_scale: '',
+          slices_of_bread: '',
         }}
         validationSchema={schema}
         onSubmit={handleSubmit}
@@ -85,15 +107,22 @@ export const MyKitchenForm = ({ onSubmit }) => {
               </label>
               <label htmlFor="type">
                 type
-                <Field name="type" as="select"   required>
-                <option value="empty" >Select your favorite dish</option>
+                <Field
+                  name="type"
+                  as="select"
+                  value={dishesType}
+                  required
+                  onChange={handleSelect}
+                >
+                  <option value="empty">Select your favorite dish</option>
                   <option value="pizza">pizza</option>
                   <option value="soup">soup</option>
                   <option value="sandwich">sandwich</option>
                 </Field>
               </label>
-              {/* {dishesType==="pizza" && <PizzaForm />} */}
-              <PizzaForm />
+              {dishesType==="pizza" && <PizzaForm />}
+              {dishesType==="soup" && <SoapForm />}
+              {dishesType==="sandwich" && <SandwichForm />}
 
               <button type="submit" disabled={isSubmitting}>
                 Let`s GO!`
