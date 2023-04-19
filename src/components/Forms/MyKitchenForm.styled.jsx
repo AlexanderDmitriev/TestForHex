@@ -64,6 +64,7 @@ export const LetsGoButton = styled.button`
   padding: 10px 20px;
   border-radius: 8px;
   border: none;
+  cursor: pointer;
   font-family: Raleway, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -77,4 +78,13 @@ export const LetsGoButton = styled.button`
   :hover {
     background-color: #418b77;
   }
+`;
+
+export const StyledErrorMessage = styled.p`
+  font-family: Raleway, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.2;
+  color: red;
+  display: flex;
 `;

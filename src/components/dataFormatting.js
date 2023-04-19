@@ -1,4 +1,5 @@
-export const dataFormatting = (values, dishesType, formattedTime,spiceLevel) => {
+export const dataFormatting = (data) => {
+  const {values, dishesType, formattedTime,spiceLevel} = data;
   let additionalData;
   switch (dishesType) {
     case 'pizza':

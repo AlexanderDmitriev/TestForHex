@@ -9,20 +9,19 @@ import {
   InputField,
   TitleLabel,
   Container,
-  InputFieldsSection, LetsGoButton,
+  InputFieldsSection,
+  LetsGoButton,
+  StyledErrorMessage,
 } from './MyKitchenForm.styled';
 import { useState } from 'react';
 
 export const MyKitchenForm = ({ dishesType, handleSelect, onSubmit }) => {
   const [spiceLevel, setSpiceLevel] = useState(1);
+
   const handleSubmit = (values, { resetForm }) => {
     const formattedTime = timeFormatter(values);
-    const dataToSending = dataFormatting(
-      values,
-      dishesType,
-      formattedTime,
-      spiceLevel
-    );
+    const sendingObject = { values, dishesType, formattedTime, spiceLevel };
+    const dataToSending = dataFormatting(sendingObject);
     onSubmit(dataToSending);
     resetForm();
   };
@@ -52,7 +51,9 @@ export const MyKitchenForm = ({ dishesType, handleSelect, onSubmit }) => {
                     <InputField type="text" name="name" title="name" required />
                     <ErrorMessage
                       name="name"
-                      render={<p>{'Incorrect name'}</p>}
+                      render={msg => (
+                        <StyledErrorMessage>{msg}</StyledErrorMessage>
+                      )}
                     />
                   </TitleLabel>
                   <TitleLabel htmlFor="preparation_time">
@@ -65,7 +66,9 @@ export const MyKitchenForm = ({ dishesType, handleSelect, onSubmit }) => {
                     />
                     <ErrorMessage
                       name="preparation_time"
-                      render={msg => <p>{'Incorrect preparation_time'}</p>}
+                      render={msg => (
+                        <StyledErrorMessage>{msg}</StyledErrorMessage>
+                      )}
                     />
                   </TitleLabel>
                   <TitleLabel htmlFor="type">
