@@ -2,27 +2,11 @@ import { Formik, Form, ErrorMessage, Field } from 'formik';
 import { PizzaForm } from './PizzaForm';
 import { SoapForm } from './SoapForm';
 import { SandwichForm } from './SandwichForm';
-import { useState, useEffect } from 'react';
-import { schema } from './validationSchema';
+import { useState } from 'react';
+import { schema } from '../validationSchema';
 
 export const MyKitchenForm = ({ onSubmit }) => {
   const [dishesType, setDishesType] = useState('');
-
-  useEffect(() => {
-    switch (dishesType) {
-      case 'pizza':
-        setDishesType('pizza');
-        break;
-      case 'soup':
-        setDishesType('soup');
-        break;
-      case 'sandwich':
-        setDishesType('sandwich');
-        break;
-      default:
-        setDishesType('');
-    }
-  }, [dishesType]);
 
   const handleSelect = event => {
     const { value } = event.target;

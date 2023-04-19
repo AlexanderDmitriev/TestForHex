@@ -1,4 +1,4 @@
-import { MyKitchenForm } from './MyKitchenForm';
+import { MyKitchenForm } from './Forms/MyKitchenForm';
 import { usePostDishesMutation } from '../redux/dishes';
 
 export const App = () => {
