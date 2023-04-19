@@ -1,16 +1,7 @@
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import { PizzaForm } from './PizzaForm';
-import * as yup from 'yup';
 import { useState } from 'react';
-
-//Схема валидации
-const schema = yup.object().shape({
-  name: yup.string().min(3).required(),
-  preparation_time: yup.number().positive().integer().required(),
-  type: yup.string().matches(/(pizza|soup|sandwich)/),
-  no_of_slices: yup.number().integer().positive(),
-  diameter: yup.number().positive(),
-});
+import {schema} from './validationSchema';
 
 export const MyKitchenForm = ({ onSubmit }) => {
   const [dishesType, setDishesType] = useState('');
@@ -53,6 +44,7 @@ export const MyKitchenForm = ({ onSubmit }) => {
       ...additionalData,
     };
     console.log(dataToSending);
+    console.log(dishesType);
     onSubmit(dataToSending);
     resetForm();
   };
