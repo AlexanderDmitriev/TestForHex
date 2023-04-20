@@ -12,6 +12,7 @@ import {
   InputFieldsSection,
   LetsGoButton,
   StyledErrorMessage,
+  InputTitle,
 } from './MyKitchenForm.styled';
 import { useState } from 'react';
 
@@ -47,7 +48,7 @@ export const MyKitchenForm = ({ dishesType, handleSelect, onSubmit }) => {
               <InputFieldsSection>
                 <div>
                   <TitleLabel htmlFor="name">
-                    Your dish
+                    <InputTitle>Your dish</InputTitle>
                     <InputField type="text" name="name" title="name" required />
                     <ErrorMessage
                       name="name"
@@ -57,7 +58,8 @@ export const MyKitchenForm = ({ dishesType, handleSelect, onSubmit }) => {
                     />
                   </TitleLabel>
                   <TitleLabel htmlFor="preparation_time">
-                    Preparation time in minutes
+                    <InputTitle>Preparation time in minutes</InputTitle>
+
                     <InputField
                       type="string"
                       name="preparation_time"
@@ -72,7 +74,8 @@ export const MyKitchenForm = ({ dishesType, handleSelect, onSubmit }) => {
                     />
                   </TitleLabel>
                   <TitleLabel htmlFor="type">
-                    Type of your dish
+                    <InputTitle>Type of your dish</InputTitle>
+
                     <InputField
                       name="type"
                       as="select"

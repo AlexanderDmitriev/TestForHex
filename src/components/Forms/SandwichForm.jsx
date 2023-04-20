@@ -3,13 +3,15 @@ import {
   TitleLabel,
   InputField,
   StyledErrorMessage,
+  InputTitle,
 } from './MyKitchenForm.styled';
 
 export const SandwichForm = () => {
   return (
     <>
       <TitleLabel htmlFor="slices_of_bread">
-        How many slices of bread?
+        <InputTitle>How many slices of bread?</InputTitle>
+
         <InputField
           type="number"
           name="slices_of_bread"

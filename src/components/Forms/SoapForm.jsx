@@ -3,6 +3,7 @@ import {
   TitleLabel,
   RangeSelect,
   StyledErrorMessage,
+  InputTitle,
 } from './MyKitchenForm.styled';
 
 export const SoapForm = ({ spiceLevel, setSpiceLevel }) => {
@@ -14,7 +15,8 @@ export const SoapForm = ({ spiceLevel, setSpiceLevel }) => {
   return (
     <>
       <TitleLabel htmlFor="spiciness_scale">
-        Your spiciness scale is {spiceLevel}
+        <InputTitle>Your spiciness scale is {spiceLevel}</InputTitle>
+
         <RangeSelect
           type="range"
           min="1"

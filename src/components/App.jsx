@@ -4,7 +4,7 @@ import { usePostDishesMutation } from '../redux/dishes';
 import toast, { Toaster } from 'react-hot-toast';
 
 export const App = () => {
-  const [postDish,  isSuccess ] = usePostDishesMutation();
+  const [postDish,  isSuccess, isError ] = usePostDishesMutation();
   const [dishesType, setDishesType] = useState('');
 
   const handleSelect = event => {
@@ -16,6 +16,9 @@ export const App = () => {
     postDish({ name, preparation_time, type, ...additionalData });
     if (isSuccess) {
       toast.success(`Successfully. Cooking for you now. Sorry, you have no choice yet`);
+    }
+    if (isError){
+      toast.error(`Oops, something wrong. Try again!`);
     }
   };
 
